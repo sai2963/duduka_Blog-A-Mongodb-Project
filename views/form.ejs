@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Blog</a>
+          
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-default" type="submit">AllPosts</button>
+              <button class="btn btn-outline-success" type="submit">CreatePost</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <h1>Add a New Post</h1>
+    <div class="container">
+      <form action="/index" method="post">
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" name="Title" placeholder="Example input placeholder">
+        </div>
+        <div class="mb-3">
+            <label for="Summary" class="form-label">Summary</label>
+            <input type="text" class="form-control" id="Summary" name="Summary" placeholder="Another input placeholder">
+        </div>
+        <div class="mb-3">
+            <label for="Content" class="form-label">Post Content</label>
+            <textarea type="text" class="form-control" id="Content" name="Content" placeholder="Another input placeholder"></textarea>
+        </div>
+        <div class="container-el">
+          <label for="author">Select Author</label>
+            <select class="form-select" aria-label="Default select example" name="author" id="author">
+                <% authors.forEach(author => { %>
+                    <option value="<%= author._id %>"><%= author.name %></option>
+                <% }); %>
+                
+            </select>
+        </div>
+        <div class="container-el">
+            <button class="btn btn-outline-success" >Add a Post</button>
+        </div>
+    </form>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+  <style>
+    .container-el{
+        margin: 20px auto;
+    }
+    .container{
+        border: 1.5px solid black;
+     
+    }
+  </style>
+</html>

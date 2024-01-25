@@ -1,0 +1,200 @@
+ratingportal> use ratingportal
+already on db ratingportal
+ratingportal> db.restaurants.insertOne({ name:"Duduka",address:{street:"Some Street 5",streetNumber:"25b"}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b20723137f833e1d0d19bb')
+}
+ratingportal> db.restaurants.insertOne({ name:"Duduka Foundations",address:{street:"Some Street 6",streetNumber:"25g"}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b2078f137f833e1d0d19bc')
+}
+ratingportal> db.restaurants,find()
+ReferenceError: find is not defined
+ratingportal> db.restaurants.find()
+[
+  {
+    _id: ObjectId('65b20723137f833e1d0d19bb'),
+    name: 'Duduka',
+    address: { street: 'Some Street 5', streetNumber: '25b' }
+  },
+  {
+    _id: ObjectId('65b2078f137f833e1d0d19bc'),
+    name: 'Duduka Foundations',
+    address: { street: 'Some Street 6', streetNumber: '25g' }
+  }
+]
+ratingportal> db.restaurants.find({name:"Duduka"})
+[
+  {
+    _id: ObjectId('65b20723137f833e1d0d19bb'),
+    name: 'Duduka',
+    address: { street: 'Some Street 5', streetNumber: '25b' }
+  }
+]
+ratingportal> db.restaurants.find(name)
+ReferenceError: name is not defined
+ratingportal> db.restaurants.find({},{name:1})
+[
+  { _id: ObjectId('65b20723137f833e1d0d19bb'), name: 'Duduka' },
+  {
+    _id: ObjectId('65b2078f137f833e1d0d19bc'),
+    name: 'Duduka Foundations'
+  }
+]
+ratingportal> db.restaurants.find({},{name:1,_id:0})
+[ { name: 'Duduka' }, { name: 'Duduka Foundations' } ]
+ratingportal> db.restaurants.findOne({name:"Dududka"})
+null
+ratingportal> db.restaurants.findOne({name:"Duduka"})
+{
+  _id: ObjectId('65b20723137f833e1d0d19bb'),
+  name: 'Duduka',
+  address: { street: 'Some Street 5', streetNumber: '25b' }
+}
+ratingportal> db.restaurants.updateOne({_id: ObjectId('65b20723137f833e1d0d19bb')},{$set:{name:"Duduka SAi"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+ratingportal> db.restaurants.updateOne({_id: ObjectId('65b20723137f833e1d0d19bb')},{$set:{address.street:"Some Strret"}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:83)
+
+> 1 | db.restaurants.updateOne({_id: ObjectId('65b20723137f833e1d0d19bb')},{$set:{address.street:"Some Strret"}})
+    |                                                                                    ^
+  2 |
+
+ratingportal> db.restaurants.updateOne({_id: ObjectId('65b20723137f833e1d0d19bb')},{$set:{"address.street":"Some Strret"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+ratingportal> db.restaurants.find()
+[
+  {
+    _id: ObjectId('65b20723137f833e1d0d19bb'),
+    name: 'Duduka SAi',
+    address: { street: 'Some Strret', streetNumber: '25b' }
+  },
+  {
+    _id: ObjectId('65b2078f137f833e1d0d19bc'),
+    name: 'Duduka Foundations',
+    address: { street: 'Some Street 6', streetNumber: '25g' }
+  }
+]
+ratingportal> db.restaurants.updateOne({_id: ObjectId('65b20723137f833e1d0d19bb')},{$set:{name:"Duduka Sai"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+ratingportal> db.restauramts.deleteOne({_id: ObjectId('65b20723137f833e1d0d19bc')})
+{ acknowledged: true, deletedCount: 0 }
+ratingportal> db.restaurants.find()
+[
+  {
+    _id: ObjectId('65b20723137f833e1d0d19bb'),
+    name: 'Duduka Sai',
+    address: { street: 'Some Strret', streetNumber: '25b' }
+  },
+  {
+    _id: ObjectId('65b2078f137f833e1d0d19bc'),
+    name: 'Duduka Foundations',
+    address: { street: 'Some Street 6', streetNumber: '25g' }
+  }
+]
+ratingportal> db.restaurants.deleteMany({})
+{ acknowledged: true, deletedCount: 2 }
+ratingportal> db.types.insertOne({name:"Italian"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b2132f137f833e1d0d19bd')
+}
+ratingportal> db.types.insertOne({name:"German"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b2133e137f833e1d0d19be')
+}
+ratingportal> db.types.insertOne({name:"Indian"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b21347137f833e1d0d19bf')
+}
+ratingportal> db types.dind()
+Uncaught:
+SyntaxError: Missing semicolon. (1:2)
+
+> 1 | db types.dind()
+    |   ^
+  2 |
+
+ratingportal> db.types.dind()
+TypeError: db.types.dind is not a function
+ratingportal> db.types.find()
+[
+  { _id: ObjectId('65b2132f137f833e1d0d19bd'), name: 'Italian' },
+  { _id: ObjectId('65b2133e137f833e1d0d19be'), name: 'German' },
+  { _id: ObjectId('65b21347137f833e1d0d19bf'), name: 'Indian' }
+]
+ratingportal> db.restaurants.insertOne({name:"Duduka",address:{street:"Foodstreet",streetNumber:"23b",postalcode:"649715",city:"Munich",Country:"Germany"},type:{typeId:ObjectId('65b2132f137f833e1d0d19bd'),name:"German"}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b21568137f833e1d0d19c0')
+}
+ratingportal> db.restaurants.insertOne({name:"Duduka Food Court",address:{street:"Foodstreet12",streetNumber:"453b",postalcode:"6465415",city:"asunich",Country:"Germany"},type:{typeId:ObjectId('65b2132f137f833e1d0d19bd'),name:"German"}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b215e2137f833e1d0d19c1')
+}
+ratingportal> db.restaurants.find()
+[
+  {
+    _id: ObjectId('65b21568137f833e1d0d19c0'),
+    name: 'Duduka',
+    address: {
+      street: 'Foodstreet',
+      streetNumber: '23b',
+      postalcode: '649715',
+      city: 'Munich',
+      Country: 'Germany'
+    },
+    type: { typeId: ObjectId('65b2132f137f833e1d0d19bd'), name: 'German' }
+  },
+  {
+    _id: ObjectId('65b215e2137f833e1d0d19c1'),
+    name: 'Duduka Food Court',
+    address: {
+      street: 'Foodstreet12',
+      streetNumber: '453b',
+      postalcode: '6465415',
+      city: 'asunich',
+      Country: 'Germany'
+    },
+    type: { typeId: ObjectId('65b2132f137f833e1d0d19bd'), name: 'German' }
+  }
+]
+ratingportal> db.reviews.insertOne({reviewer:{FirstName:"Duduka",Lastname:"Sai"},Rating:3,Text:"This was okay could be better",date:new Date("2024-01-24"),restaurant:{id:ObjectId('65b215e2137f833e1d0d19c1'),name:"Duduka"} })
+{
+  acknowledged: true,
+  insertedId: ObjectId('65b21888137f833e1d0d19c2')
+}
+ratingportal> db.reviews.findOne()
+{
+  _id: ObjectId('65b21888137f833e1d0d19c2'),
+  reviewer: { FirstName: 'Duduka', Lastname: 'Sai' },
+  Rating: 3,
+  Text: 'This was okay could be better',
+  date: ISODate('2024-01-24T00:00:00.000Z'),
+  restaurant: { id: ObjectId('65b215e2137f833e1d0d19c1'), name: 'Duduka' }
+}
+ratingportal>
