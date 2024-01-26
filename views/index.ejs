@@ -13,13 +13,13 @@
           
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-default" type="submit">AllPosts</button>
-              <button class="btn btn-outline-success" type="submit">CreatePost</button>
+              <a href="/index" class="btn btn-outline-default" type="submit">AllPosts</a>
+              <a href="/form" class="btn btn-outline-success" type="submit">CreatePost</a>
             </form>
           </div>
         </div>
       </nav>
-<h2>All Posts</h2>
+<h3 style="text-align: center;">All Posts</h3>
 <% if (!posts||posts.length===0){%>
   <p>No posts Found - maybe start creating some?</p>
   <a class="btm" href="/form"></a>
