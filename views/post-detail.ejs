@@ -28,11 +28,19 @@
         <a href="mailto:<%=detail.author.email%>"><%= detail.author.name %></a>  
 </div>
 
-
-
-
+<hr>
 <div class="container">
-  <button id="viewcomments" class="btn btn-success" data-postid="<%= detail._id %>">View Coments</button>
+  <h4>All Comments</h4>
+  <section id="comments" class="container">
+   
+    <button id="viewcomments" class="btn btn-success" data-postid="<%= detail._id %>">View Coments</button>
+    <p></p>
+  </section>
+</div>
+
+<hr>
+<div class="container">
+  
   <h4>Comment</h4>
   <form action="/post-detail/comment/<%= detail._id %>" method="post">
 

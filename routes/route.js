@@ -63,7 +63,7 @@ router.get("/post-detail/comment/:id", async (req, res) => {
   const comments = await db
     .getDb()
     .collection("comment")
-    .find({ postD:postId }).toArray();
+    .find({ postD:new ObjectId(postId) }).toArray();
   
   //res.render("post-detail", { detail: detail ,comments:comments});
   res.json(comments);
@@ -86,6 +86,7 @@ router.get("/index/update/:id", async (req, res) => {
 });
 router.get("/index/post-detail/:id", async (req, res) => {
   const postId = req.params.id;
+  console.log(postId);
   const detail = await db
     .getDb()
     .collection("posts")
@@ -93,7 +94,12 @@ router.get("/index/post-detail/:id", async (req, res) => {
   if (!detail) {
     return res.status(404).send("Post Didnt found");
   }
-  res.render("post-detail", { detail: detail });
+  const comments = await db
+    .getDb()
+    .collection("comment")
+    .find({ postD:new ObjectId(postId) }).toArray();
+    console.log(comments);
+  res.render("post-detail", { detail: detail, comments:comments });
 });
 router.post("/post/edit/:id", async (req, res) => {
   console.log(req.body);
