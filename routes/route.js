@@ -1,4 +1,4 @@
-const express = require("express");
+const express=require("express");
 const router = express.Router();
 const mongodb = require("mongodb");
 const db = require("../data/database");
@@ -43,6 +43,33 @@ router.post("/index", async (req, res) => {
 
   res.redirect("/index");
 });
+router.post("/post-detail/comment/:id", async (req, res) => {
+  const postId = new ObjectId(req.params.id);
+  //console.log(postId);
+  const commentdata = {
+    postD: postId,
+    comment: req.body.comment,
+    desc: req.body.desc
+  };
+  await db.getDb().collection("comment").insertOne(commentdata);
+
+  res.redirect(`/index/post-detail/${postId}`); // Redirect to the post detail page for the post ID
+});
+
+
+router.get("/post-detail/comment/:id", async (req, res) => {
+  const postId = req.params.id;
+  
+  const comments = await db
+    .getDb()
+    .collection("comment")
+    .find({ postD:postId }).toArray();
+  
+  //res.render("post-detail", { detail: detail ,comments:comments});
+  res.json(comments);
+});
+
+
 router.get("/index/update/:id", async (req, res) => {
   const postId = req.params.id;
   const post = await db
@@ -89,9 +116,9 @@ router.post("/post/edit/:id", async (req, res) => {
 router.post("/post/delete/:id", async (req, res) => {
   const postId = new ObjectId(req.params.id);
 
-  const post = await db.getDb()
-  .collection("posts").deleteOne({ _id: postId });
-  res.redirect('/index')
+  const post = await db.getDb().collection("posts").deleteOne({ _id: postId });
+  res.redirect("/index");
 });
+
 
 module.exports = router;
